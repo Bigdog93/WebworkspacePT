@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>글쓰기</title>
+</head>
+<body>
+	<h1>글쓰기</h1>
+	<form action="/write" method="get"> <!-- 
+	action은 form으로 감싸져있는 곳 안에 있는 애들을 데리고 갈 곳. 
+	method는 get으로 할지 post로 할지
+	-->
+		<div>
+			제목 : <input type="text" name="title">
+		</div>
+		<div>
+			내용 : <textarea name="ctnt" rows="10" cols="10"></textarea>
+		</div>
+		<div>
+			<input type="submit" value="글쓰기"> <!-- 얘가 방아쇠. 누르면 빵 하고 get방식으로 /write로 보내줌 -->
+		</div>
+	</form>
+	
+</body>
+</html>

@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>제목 : ${data.title}</div>
+	<!-- 
+	!!!! EL식 !!!!
+	data : 서블렛에서 setAttribute로 줄때 설정한 key값
+	그럼 key값에 저장된 value값이 오고, 
+	value가 객체주소값이라면 .으로 
+	그 주소값 객체의 필드에 접근할 수 있다.
+	title로 하면 알아서 getTitle() 메소드로 가져와준다.
+	또는 직접 .getTitle()로 넣어줘도 됨.
+	
+	즉, EL식은 (형변환)request.getAttribute("key").변수명
+	getParameter는
+	${param.name=""으로 준 키값} 으로 쿼리스트링으로 온 것도 받을 수 있다.
+	
+	 -->
+	<div>내용 : ${data.getCtnt()}</div>
+</body>
+</html>

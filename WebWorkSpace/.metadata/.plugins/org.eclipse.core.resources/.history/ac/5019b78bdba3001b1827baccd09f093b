@@ -1,0 +1,30 @@
+package com.koreait.first;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/BoardListServlet") // 이게 없었으면, web.xml에다가 엄청 길게 적어서 이쪽으로 연결을 시켜줘야 했다.
+public class BoardListServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public BoardListServlet() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath()); // 이렇게 servelet에서 바로 뿌려줄 수도 있다.
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+		
+		System.out.println("doPost");
+		doGet(request, response);
+	}
+	
+
+}

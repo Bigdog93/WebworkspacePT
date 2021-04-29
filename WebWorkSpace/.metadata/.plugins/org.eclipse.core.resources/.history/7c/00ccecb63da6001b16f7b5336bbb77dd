@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ page import="java.util.*" %>
+<%@ page import="com.koreait.board.*" %> 
+    
+<%
+    List<BoardVO> list = (List<BoardVO>) request.getAttribute("data"); // 이렇게 전체를 받아오는거 보다,
+	// getAttribute로 가져올 때도 Object로 가져옴
+	BoardVO vo = (BoardVO) request.getAttribute("vo");					// 이렇게 서블릿에서 걸러서 가져다 주는게 나을꺼 같다..
+	// 저기 멀리 브라우저에서 부터 오는건 getParameter로 받는다 (set이 없다)
+	// 서블릿에 (set으로)담긴거 가져올때는 getAttribute로 받아온다.
+	// 서블릿에 담을때는 setAttribute로 담는다.
+	
+	// get으로 요청하는건 리터럴 아니면 주소값이다.
+	
+	// getParameter는 String형으로 받고
+	// getAttribute는 Object형으로 받는다.
+	
+	String str = request.getParameter("no");
+	// 서블릿의 request나 여기의 request나 같은놈. (서블릿에서 forward메소드로 request, reponse를 다 넘겨주기 때문. 그놈이 그놈)
+	
+	int no = Integer.parseInt(str);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>디테일<%=no %></h1>
+	<!-- 나중에 EL식이란 걸로 쓰면 스크립트릿 안써도 된다링 -->
+	<%=request.getParameter("no") %> <!-- 이렇게 적는걸 표현식이라 한다. -->
+	<h2>제목 : <%=vo.getTitle() %></h2>
+	<p>내용 : <%=vo.getCtnt() %></p>
+</body>
+</html>

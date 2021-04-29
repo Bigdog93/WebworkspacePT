@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+body {
+		background-color: pink;
+}
+	
+table, th, td {
+	border : 1px solid black;
+	border-collapse : collapse;
+	width : 600px;
+	height : 100%;
+	align-items: center;
+	justify-content: center;
+}
+h1 {
+	text-align: center;
+}
+
+.container {
+	display : flex;
+	flex-direction: column;
+}

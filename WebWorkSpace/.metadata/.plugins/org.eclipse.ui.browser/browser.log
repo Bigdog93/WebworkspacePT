@@ -1,0 +1,4 @@
+
+4월 23, 2021 10:12:30.365 NEW SESSION
+4월 23, 2021 10:12:30.365 [11960:16036:0423/101230.363:ERROR:device_event_log_impl.cc(214)] [10:12:30.363] USB: usb_device_handle_win.cc:1056 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+4월 23, 2021 15:36:42.660 [11960:5676:0423/153642.658:ERROR:mcs_client.cc(755)] Received close command, resetting connection.

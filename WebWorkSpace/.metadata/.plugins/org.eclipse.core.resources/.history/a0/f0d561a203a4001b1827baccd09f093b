@@ -1,0 +1,12 @@
+package com.koreait.board;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Database {
+	private static List<BoardVO> list = new ArrayList();
+	
+	public static List getlist() {
+		return list;
+	}
+}
