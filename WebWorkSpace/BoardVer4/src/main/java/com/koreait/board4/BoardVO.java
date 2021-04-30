@@ -10,6 +10,11 @@ public class BoardVO {
 		this.title = title;
 		this.ctnt = ctnt;
 	}
+	BoardVO(int iboard, String title, String ctnt, String regdt) {
+		this(title, ctnt);
+		this.iboard = iboard;
+		this.regdt = regdt;
+	}
 	public int getIboard() {
 		return iboard;
 	}

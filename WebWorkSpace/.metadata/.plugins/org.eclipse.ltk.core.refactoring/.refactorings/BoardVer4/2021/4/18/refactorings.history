@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;content&apos; in &apos;com.koreait.board4.BoardWriteServlet.doPost(...)&apos; to &apos;ctnt&apos;&#x0D;&#x0A;- Original project: &apos;BoardVer4&apos;&#x0D;&#x0A;- Original element: &apos;com.koreait.board4.BoardWriteServlet.doPost(HttpServletRequest, HttpServletResponse).content&apos;&#x0D;&#x0A;- Renamed element: &apos;content&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;content&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src\/main\/java&lt;com.koreait.board4{BoardWriteServlet.java[BoardWriteServlet~doPost~QHttpServletRequest;~QHttpServletResponse;@content!814!859!821!827!QString;!0!false" name="ctnt" references="true" stamp="1619742375130" version="1.0"/>
+</session>

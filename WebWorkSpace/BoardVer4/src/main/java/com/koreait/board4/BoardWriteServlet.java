@@ -21,13 +21,17 @@ public class BoardWriteServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title");
-		String content = request.getParameter("ctnt");
+		String ctnt = request.getParameter("ctnt");
 		
 		System.out.println(title);
-		System.out.println(content);
+		System.out.println(ctnt);
 		
-		BoardVO vo = new BoardVO(title, content);
+		BoardVO vo = new BoardVO(title, ctnt);
 		
+		int test_no = BoardDAO.insertBoard(vo);
+		System.out.println(test_no);
+		
+		response.sendRedirect("/list");
 	}
 
 }
