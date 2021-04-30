@@ -95,7 +95,7 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
-		String sql = " DELETE FROM t_board WHERE iboard = ? ";
+		String sql = " DELETE FROM i_board WHERE iboard = ? ";
 		
 		try {
 			con = DBUtils.getCon();
@@ -103,7 +103,7 @@ public class BoardDAO {
 			ps.setInt(1, idx);
 			return ps.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			// TODO: handle exception
 		} finally {
 			DBUtils.close(con, ps);
 		}
@@ -115,7 +115,7 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
-		String sql = " UPDATE t_board SET title = ?, ctnt = ? WHERE iboard = ? ";
+		String sql = " UPDATE i_board SET title = ?, ctnt = ? WHERE iboard = ? ";
 		 try {
 			con = DBUtils.getCon();
 			ps = con.prepareStatement(sql);

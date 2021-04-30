@@ -115,7 +115,7 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
-		String sql = " UPDATE t_board SET title = ?, ctnt = ? WHERE iboard = ? ";
+		String sql = " UPDATE i_board SET title = ?, ctnt = ? WHERE iboard = ? ";
 		 try {
 			con = DBUtils.getCon();
 			ps = con.prepareStatement(sql);
