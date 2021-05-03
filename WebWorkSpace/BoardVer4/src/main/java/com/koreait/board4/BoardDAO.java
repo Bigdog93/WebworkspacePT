@@ -42,13 +42,19 @@ public class BoardDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = " SELECT iboard, title, regdt FROM t_board "; // ; 넣으면 아마 에러.. 외부에서의 ;를 이용한 데이터베이스 접근을 막기 위함
+		String sql = " SELECT A.iboard, A.title, A.regdt, A.viewcnt, COUNT(B.icmt) AS cmt_cnt "
+				+ "FROM t_board A "
+				+ "LEFT JOIN t_cmt B "
+				+ "ON A.iboard = B.iboard "
+				+ "GROUP BY A.iboard "
+				+ "ORDER BY A.iboard DESC "; // ; 넣으면 아마 에러.. 외부에서의 ;를 이용한 데이터베이스 접근을 막기 위함
+		// 뒤에 ORDER BY iboard DESC는 리스트를 역순으로 가져와 최신글이 위에 뜨게 만든다.
 		try {
 			con = DBUtils.getCon();
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery(); // 셀렉트만 얘 쓸꺼야
 			while(rs.next()) { // rs.next() : 첫번째 실행되면 첫번째 줄을 가리킨다.(일종의 포인터) 가리켰는데 레코드가 있으면 true, 없으면 false 반환
-				BoardVO vo = new BoardVO(rs.getInt("iboard"), rs.getString("title"), null, rs.getString("regdt"));
+				BoardVO vo = new BoardVO(rs.getInt("iboard"), rs.getString("title"), rs.getString("regdt"), rs.getInt("viewcnt"), rs.getInt("cmt_cnt"));
 				list.add(vo);
 			}
 			return list;
@@ -66,11 +72,16 @@ public class BoardDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = " SELECT title, ctnt, regdt FROM t_board WHERE iboard = ? ";
+		String sql1 = " SELECT title, ctnt, regdt, viewcnt FROM t_board WHERE iboard = ? ";
+		String sql2 = " UPDATE t_board SET viewcnt = viewcnt + 1 WHERE iboard = ? ";
 		
 		try {
 			con = DBUtils.getCon();
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(sql2);
+			ps.setInt(1, idx);
+			ps.executeUpdate();
+			ps.close();
+			ps = con.prepareStatement(sql1);
 			ps.setInt(1, idx);
 			rs = ps.executeQuery();
 			if(rs.next()) {
@@ -78,6 +89,7 @@ public class BoardDAO {
 				String ctnt = rs.getString("ctnt");
 				String regdt = rs.getString("regdt");
 				BoardVO vo = new BoardVO(idx, title, ctnt, regdt);
+				vo.setViewcnt(rs.getInt("viewcnt"));
 				return vo;
 			}
 			
@@ -91,16 +103,21 @@ public class BoardDAO {
 	}
 	
 	//글 삭제
-	public static int deleteBoard(int idx) {
+	public static int deleteBoard(BoardVO param) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
-		String sql = " DELETE FROM t_board WHERE iboard = ? ";
+		String sql1 = " DELETE FROM t_board WHERE iboard = ? ";
+		String sql2 = " DELETE FROM t_cmt WHERE iboard = ? ";
 		
 		try {
 			con = DBUtils.getCon();
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, idx);
+			ps = con.prepareStatement(sql2);
+			ps.setInt(1, param.getIboard());
+			ps.executeUpdate();
+			ps.close();
+			ps = con.prepareStatement(sql1);
+			ps.setInt(1, param.getIboard());
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,7 +128,7 @@ public class BoardDAO {
 	}
 	
 	// 글 수정
-	public static int modifyBoard(int idx, BoardVO vo) {
+	public static int modifyBoard(BoardVO vo) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -122,7 +139,7 @@ public class BoardDAO {
 			
 			ps.setString(1, vo.getTitle());
 			ps.setString(2, vo.getCtnt());
-			ps.setInt(3, idx);
+			ps.setInt(3, vo.getIboard());
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -131,4 +148,148 @@ public class BoardDAO {
 		}
 		 return 0;
 	}
+	
+	//글 검색
+	public static List<BoardVO> searchBoard(String word) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<BoardVO> list = new ArrayList<BoardVO>();
+		System.out.println(word);
+		
+		String sql = "SELECT * FROM t_board WHERE title LIKE ? ORDER BY iboard DESC";
+		// '%?%' 라고 쓰면 -> LIKE '%'칸'%'
+		// ?만 써도 ''를 넣어준다.
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, "%" + word + "%");//hello
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				BoardVO vo = new BoardVO(rs.getInt("iboard"), rs.getString("title"), rs.getString("ctnt"), rs.getString("regdt"));
+				System.out.println(vo.getIboard());
+				list.add(vo);
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
+		
+		return null;
+	}
+	
+	//=============================== 댓글 기능 ===========================
+	
+	public static int cmtWrite(CmtVO cvo) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = " INSERT INTO t_cmt (iboard, cmtID, cmt) VALUES (?, ?, ?) ";
+		
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, cvo.getIboard());
+			ps.setString(2, cvo.getCmtID());
+			ps.setString(3, cvo.getCmt());
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			DBUtils.close(con, ps);
+		}
+		
+		return 0;
+	}
+	
+	public static List<CmtVO> cmtSelect(BoardVO vo) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = " SELECT * FROM t_cmt WHERE iboard = ?";
+		
+		List<CmtVO> cmt_list = new ArrayList<CmtVO>();
+		
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, vo.getIboard());
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				CmtVO cvo = new CmtVO(rs.getInt("iboard"), rs.getInt("icmt"), rs.getString("cmtID"), rs.getString("cmt"), rs.getString("cmt_regdt"));
+				cmt_list.add(cvo);
+			}
+			return cmt_list;
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
+		return null;
+	}
+	
+	public static int cmtDelete(CmtVO cvo) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = " DELETE FROM t_cmt WHERE icmt = ? ";
+		
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, cvo.getIcmt());
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			DBUtils.close(con, ps);
+		}
+		return 0;
+	}
+	
+	public static List<CmtVO> cmtCount() {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT A.iboard, COUNT(B.icmt) AS cmt_cnt "
+				+ "FROM t_board A "
+				+ "LEFT JOIN t_cmt B "
+				+ "ON A.iboard = B.iboard "
+				+ "GROUP BY A.iboard "
+				+ "ORDER BY A.iboard DESC ";
+		List<CmtVO> cmt_cnt = new ArrayList<CmtVO>();
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				CmtVO cvo = new CmtVO();
+				cvo.setIcmt(rs.getInt("cmt_cnt"));
+				cvo.setIboard(rs.getInt("iboard"));
+				cmt_cnt.add(cvo);
+			}
+			return cmt_cnt;
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
+		return null;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

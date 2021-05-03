@@ -32,9 +32,10 @@ public class BoardModifyServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String ctnt = request.getParameter("ctnt");
 		
-		BoardVO vo = new BoardVO(title, ctnt);
+		BoardVO vo = new BoardVO(no, title, ctnt, null);
 		
-		int test = BoardDAO.modifyBoard(no, vo);
+		int test = BoardDAO.modifyBoard(vo);
+		
 		
 		response.sendRedirect("/detail?no=" + no);
 	}

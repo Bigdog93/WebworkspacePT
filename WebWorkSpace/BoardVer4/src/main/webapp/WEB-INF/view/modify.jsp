@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>글을 수정한다</title>
 </head>
 <body>
 	<form action="/modify" method="post">

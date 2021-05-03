@@ -27,7 +27,12 @@ public class BoardListServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String word = request.getParameter("word");
 		
+		List<BoardVO> list = BoardDAO.searchBoard(word);
+		request.setAttribute("list", list);
+		
+		request.getRequestDispatcher("/WEB-INF/view/list.jsp").forward(request, response);
 	}
 
 }

@@ -1,6 +1,8 @@
 package com.koreait.board4;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +22,10 @@ public class BoardDetailServlet extends HttpServlet {
 		
 		BoardVO vo = BoardDAO.selectBoard(no);
 		
+		List<CmtVO> cvo_list = BoardDAO.cmtSelect(vo);
+		
 		request.setAttribute("data", vo);
+		request.setAttribute("cmt_data", cvo_list);
 		
 		request.getRequestDispatcher("/WEB-INF/view/detail.jsp").forward(request, response);
 	}

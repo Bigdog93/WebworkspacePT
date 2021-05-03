@@ -5,6 +5,9 @@ public class BoardVO {
 	private String title;
 	private String ctnt;
 	private String regdt;
+	private int viewcnt;
+	private int cmt_cnt;
+	
 	BoardVO() {}
 	BoardVO(String title, String ctnt) {
 		this.title = title;
@@ -14,6 +17,14 @@ public class BoardVO {
 		this(title, ctnt);
 		this.iboard = iboard;
 		this.regdt = regdt;
+	}
+	BoardVO(int iboard, String title, String regdt, int viewcnt, int cmt_cnt) {
+		this.iboard = iboard;
+		this.title = title;
+		this.regdt = regdt;
+		this.viewcnt = viewcnt;
+		this.cmt_cnt = cmt_cnt;
+		
 	}
 	public int getIboard() {
 		return iboard;
@@ -38,5 +49,17 @@ public class BoardVO {
 	}
 	public void setRegdt(String regdt) {
 		this.regdt = regdt;
+	}
+	public int getViewcnt() {
+		return viewcnt;
+	}
+	public void setViewcnt(int viewcnt) {
+		this.viewcnt = viewcnt;
+	}
+	public int getCmt_cnt() {
+		return cmt_cnt;
+	}
+	public void setCmt_cnt(int cmt_cnt) {
+		this.cmt_cnt = cmt_cnt;
 	}
 }
