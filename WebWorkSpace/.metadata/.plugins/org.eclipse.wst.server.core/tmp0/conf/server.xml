@@ -154,7 +154,7 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
       
-      <Context docBase="C:\Git\WebworkspacePT\WebWorkSpace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\BoardVer4" path="" reloadable="true" source="org.eclipse.jst.jee.server:BoardVer4"/></Host>
+      <Context docBase="C:\Git\WebworkspacePT\WebWorkSpace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\BoardVer5" path="" reloadable="true" source="org.eclipse.jst.jee.server:BoardVer5"/></Host>
     </Engine>
   </Service>
 </Server>

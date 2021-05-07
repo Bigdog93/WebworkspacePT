@@ -43,7 +43,7 @@
 <script type="text/javascript">
 	function moveToDetail(iboard) {
 		console.log('iboard : %d', iboard);
-		location.href = '/detail?no=' + iboard;
+		location.href = '/detail?iboard=' + iboard;
 	}
 	function moveBackToList() {
 		location.href = '/list';

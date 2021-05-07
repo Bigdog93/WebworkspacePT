@@ -1,8 +1,0 @@
-package com.koreait.board4;
-
-public class BoardVO {
-	private int iboard;
-	private String title;
-	private String ctnt;
-	private String regdt;
-}
