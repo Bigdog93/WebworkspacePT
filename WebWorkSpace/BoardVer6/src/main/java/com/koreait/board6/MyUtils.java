@@ -17,6 +17,7 @@ public class MyUtils {
 		try {
 			return Integer.parseInt(str);
 		} catch (Exception e) {
+			System.out.println(e);
 			return 0;
 		}
 	}

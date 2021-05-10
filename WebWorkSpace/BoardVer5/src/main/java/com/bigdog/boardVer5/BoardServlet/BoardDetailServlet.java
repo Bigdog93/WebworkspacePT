@@ -22,6 +22,9 @@ public class BoardDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String strNo = request.getParameter("iboard");
 		int iboard = Integer.parseInt(strNo);
+		
+//		int iboard = MyUtils.getParamInt("iboard", request);
+		
 		BoardVO vo = new BoardVO();
 		vo.setIboard(iboard);
 		vo = BoardDAO.selBoard(vo);
