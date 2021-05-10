@@ -17,12 +17,13 @@ public class BoardListServlet extends HttpServlet {
 
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// 오버라이딩 메소드의 경우 throws절도 똑같이 해줘야 한다.
 		
 		List<BoardVO> list = BoardDAO.selectBoard();
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("/WEB-INF/view/list.jsp").forward(request, response);
+//		request.getRequestDispatcher("/WEB-INF/view/list.jsp").forward(request, response);
+		MyUtils.openJSP("list", request, response);
 	}
 
 
