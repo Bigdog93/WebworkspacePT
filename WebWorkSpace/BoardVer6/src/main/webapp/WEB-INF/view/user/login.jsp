@@ -4,10 +4,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+.errMsg { color: red; }
+</style>
 <title>로그인</title>
 </head>
 <body>
 	<div>
+	<% /* 원래 이렇게 써야댐..
+		String errMsg = null;
+		errMsg = (String)pageContext.getAttribute("errMsg");
+		if(errMsg == null) {
+			errMsg = (String)request.getAttribute("errMsg");
+			
+			if(errMsg == null) {
+				errMsg = (String)request.getAttribute("errMsg");
+				
+				if(errMsg == null) {
+					errMsg = (String)request.getAttribute("errMsg");
+				}
+			}
+		}
+		*/
+	%>
+		<div class="errMsg">${errMsg}</div>
 		<div>
 			<form method="post"> <!-- form에 아무것도 안적으면, 본인(현재 주소)에게 get방식으로 나타남 -->
 				<div><input type="text" name="uid" placeholder="아이디"></div> <!-- placeholder : 빈칸에 흐리게 나타나는 글 -->
