@@ -11,8 +11,8 @@ table, th, td {
 	border : 1px solid black;
 	border-collapse: collapse;
 }
-.record:hover {
-	background-color: 
+.record::hover {
+	background-color: gray;
 }
 </style>
 </head>
@@ -31,7 +31,7 @@ table, th, td {
 				<th>작성자</th>
 				<th>작성일</th>
 			</tr>
-			<c:forEach var="i" items="${list}">
+			<c:forEach var="i" items="${list}"> <!-- var="i" 는 pageContext.setAttribute("i", list.get(0)) 을 for문 돌면서 해준다. -->
 				<tr class="record" onclick="moveToDetail(${i.iboard})">
 					<td>${ i.iboard }</td>
 					<td>${ i.title }</td>
@@ -41,5 +41,11 @@ table, th, td {
 			</c:forEach>
 		</table>
 	</div>
+<script>
+	function moveToDetail(iboard) {
+		location.href = "detail?iboard="+iboard;
+		console.log(iboard);
+	}
+</script>
 </body>
 </html>

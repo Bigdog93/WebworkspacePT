@@ -32,10 +32,12 @@ public class WriteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title");
 		String ctnt = request.getParameter("ctnt");
-		HttpSession session = request.getSession(); // 이걸 jsp에 적고 파라미터로 받아오는 행위는 never 안된다. 해킹의 단초가 됨.
-		UserVO uvo = (UserVO)session.getAttribute("loginUser");
+//		HttpSession session = request.getSession(); // 이걸 jsp에 적고 파라미터로 받아오는 행위는 never 안된다. 해킹의 단초가 됨.
+//		UserVO uvo = (UserVO)session.getAttribute("loginUser");
+//		int iuser = uvo.getIuser();
+		int iuser = MyUtils.getLoginUserPk(request);
 		
-		BoardVO bvo = new BoardVO(title, ctnt, uvo.getIuser());
+		BoardVO bvo = new BoardVO(title, ctnt, iuser);
 		
 		int test = BoardDAO.insertBoard(bvo);
 		

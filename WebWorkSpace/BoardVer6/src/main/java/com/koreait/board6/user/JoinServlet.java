@@ -31,6 +31,7 @@ public class JoinServlet extends HttpServlet {
 		String unm = request.getParameter("unm");
 		int gender = MyUtils.getParamInt("gender", request);
 		
+		// 비밀번호 암호화
 		String hashedUpw = BCrypt.hashpw(upw, BCrypt.gensalt());
 		
 		

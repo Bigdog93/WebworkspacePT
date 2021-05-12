@@ -34,7 +34,7 @@ public class ListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(); // set이 안돼있으면 null이 넘어간다.
 		UserVO loginUser = (UserVO) session.getAttribute("loginUser");
-		if(loginUser == null) {
+		if(loginUser == null) { // 로그아웃 상태면 로그인 페이지로 이동
 			response.sendRedirect("/user/login");
 			return;
 		}
