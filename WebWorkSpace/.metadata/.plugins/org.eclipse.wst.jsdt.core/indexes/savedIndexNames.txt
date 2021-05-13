@@ -12,5 +12,4 @@ INDEX VERSION 1.4+C:\Git\WebworkspacePT\WebWorkSpace\.metadata\.plugins\org.ecli
 1431579602.index
 3514947134.index
 2923659115.index
-3514947134.index
 29962724.index

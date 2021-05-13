@@ -31,6 +31,21 @@
 			<a href="delete?iboard=${ data.iboard }">삭제</a> <a href="modify?iboard=${ data.iboard }">수정</a>
 		</div>
 	</c:if>
+	<form action="/coment/write" method="post">
+		<input type="hidden" name="iboard" value="${ data.iboard }">
+		<div>${ loginUser.uid } <input type="text" name="cmt_ctnt" placeholder="댓글쓰기"><input type="submit" value="작성"></div>
+	</form>
+	<c:forEach var="i" items="${ cmts }">
+		<div>${ i.uid } : ${ i.ctnt } | ${ i.regdt } 추천 : ${ i.likecnt } / 반대 : ${ i.dislike }
+			<c:if test="${ loginUser.iuser == data.iuser }">
+				<form action="/coment/delete" method="post">
+					<input type="hidden" name="iboard" value="${ data.iboard }">
+					<input type="hidden" name="icmt" value="${ i.icmt }">
+					<input type="submit" value="삭제">
+				</form>
+			</c:if>
+		</div>
+	</c:forEach>
 
 </body>
 </html>

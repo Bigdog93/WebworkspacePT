@@ -59,7 +59,8 @@ public class LoginServlet extends HttpServlet {
 		case 3:
 			errMsg = "비밀번호를 확인해 주세요.";
 			break;
-			
+		default:
+			errMsg = "로그인이 필요합니다.";
 		}
 		request.setAttribute("errMsg", errMsg);
 		doGet(request, response); // 이렇게 하면 request 와 response를 다 보내주기 때문에 편함
