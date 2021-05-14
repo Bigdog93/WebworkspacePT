@@ -15,12 +15,16 @@
     <fullyQualifiedTypeName name="com.bigdog.boardVer5.BoardDAO.BoardDAO"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="org.mindrot.jbcrypt.BCrypt"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="com.koreait.board6.board.ListServlet"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.koreait.board6.DBUtils"/>
+    <fullyQualifiedTypeName name="com.koreait.board6.board.BoardVO"/>
+    <fullyQualifiedTypeName name="com.koreait.board6.coment.ComentDAO"/>
     <fullyQualifiedTypeName name="com.koreait.board6.MyUtils"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="org.mindrot.jbcrypt.BCrypt"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.koreait.board7.DBUtils"/>
+    <fullyQualifiedTypeName name="com.koreait.board7.MyUtils"/>
 </qualifiedTypeNameHistroy>
