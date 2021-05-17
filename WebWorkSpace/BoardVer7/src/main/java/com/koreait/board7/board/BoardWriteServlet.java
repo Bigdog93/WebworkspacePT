@@ -19,10 +19,10 @@ public class BoardWriteServlet extends HttpServlet {
        
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		UserVO uvo = (UserVO)session.getAttribute("loginUser");
-		if(uvo == null) {
+		
+		if(!(MyUtils.loginChk(request))) {
 			response.sendRedirect("/user/login");
+			return;
 		}
 		MyUtils.openJSP("board/boardwrite", request, response);
 		

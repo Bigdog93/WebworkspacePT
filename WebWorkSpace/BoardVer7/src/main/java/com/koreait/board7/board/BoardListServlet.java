@@ -19,6 +19,12 @@ public class BoardListServlet extends HttpServlet {
 
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(!(MyUtils.loginChk(request))) {
+			response.sendRedirect("/user/login");
+			return;
+		}
+		
 		List<BoardVO> boardlist = BoardDAO.selBoardList();
 		
 		

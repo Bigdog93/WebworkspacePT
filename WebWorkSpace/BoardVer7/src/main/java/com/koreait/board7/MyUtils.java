@@ -11,6 +11,14 @@ import com.koreait.board7.user.UserVO;
 
 public class MyUtils {
 	
+	public static boolean loginChk(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginUser") == null) {
+			return false;
+		}
+		return true;
+	}
+	
 	public static int getLoginUserPk(HttpServletRequest request) {
 		return getLoginUser(request).getIuser();
 	}
@@ -39,4 +47,5 @@ public class MyUtils {
 	public static int getParamInt(String key, HttpServletRequest request) {
 		return parseStringToInt(request.getParameter(key));
 	}
+	
 }

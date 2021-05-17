@@ -18,6 +18,10 @@ public class BoardDeleteServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(!(MyUtils.loginChk(request))) {
+			response.sendRedirect("/user/login");
+			return;
+		}
 		int iboard = MyUtils.getParamInt("iboard", request);
 		int iuser = MyUtils.getParamInt("iuser", request);
 		HttpSession session = request.getSession();

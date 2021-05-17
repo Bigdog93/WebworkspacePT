@@ -24,7 +24,8 @@
     <fullyQualifiedTypeName name="com.koreait.board6.MyUtils"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="org.mindrot.jbcrypt.BCrypt"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="com.koreait.board7.DBUtils"/>
     <fullyQualifiedTypeName name="com.koreait.board7.MyUtils"/>
+    <fullyQualifiedTypeName name="com.koreait.board7.DBUtils"/>
+    <fullyQualifiedTypeName name="com.koreait.board7.cmt.CmtDAO"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>
