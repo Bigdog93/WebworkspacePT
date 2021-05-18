@@ -19,15 +19,16 @@ public class BoardModifyServlet extends HttpServlet {
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int iboard = MyUtils.getParamInt("iboard", request);
-		int iuser = MyUtils.getParamInt("iuser", request);
+		BoardVO bvo = new BoardVO();
+		bvo.setIboard(iboard);
+		int iuser = bvo.getIboard();
 		HttpSession session = request.getSession();
 		UserVO user = (UserVO) session.getAttribute("loginUser");
 		if(user.getIuser() != iuser) {
 			response.sendRedirect("/board/list");
 		}
 		
-		BoardVO bvo = new BoardVO();
-		bvo.setIboard(iboard);
+		
 		BoardDAO.selBoard(bvo);
 		request.setAttribute("data", bvo);
 		MyUtils.openJSP("/board/boardmodify", request, response);

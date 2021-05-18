@@ -30,6 +30,38 @@ public class BoardDAO {
 				bvo.setRegdt(rs.getString("regdt"));
 				bvo.setTitle(rs.getString("title"));
 				bvo.setViewcnt(rs.getInt("viewcnt"));
+				bvo.setUid(rs.getString("uid"));
+				boardlist.add(bvo);
+			}
+			return boardlist;
+		} catch (Exception e) {
+			return null;
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
+	}
+	
+	public static List<BoardVO> selBoardList(BoardVO param) {
+		String sql = "SELECT A.*, B.uid FROM t_board A LEFT JOIN t_user B ON A.iuser = B.iuser "
+				+ "WHERE title LIKE ? "
+				+ "ORDER BY iboard DESC";
+		List<BoardVO> boardlist = new ArrayList<BoardVO>();
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, "%" + param.getCtnt() + "%");
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				BoardVO bvo = new BoardVO();
+				bvo.setCtnt(rs.getString("ctnt"));
+				bvo.setDislike(rs.getInt("dislike"));
+				bvo.setIboard(rs.getInt("iboard"));
+				bvo.setIuser(rs.getInt("iuser"));
+				bvo.setLikecnt(rs.getInt("likecnt"));
+				bvo.setRegdt(rs.getString("regdt"));
+				bvo.setTitle(rs.getString("title"));
+				bvo.setViewcnt(rs.getInt("viewcnt"));
+				bvo.setUid(rs.getString("uid"));
 				boardlist.add(bvo);
 			}
 			return boardlist;

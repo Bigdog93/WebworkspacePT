@@ -23,14 +23,15 @@ public class BoardDeleteServlet extends HttpServlet {
 			return;
 		}
 		int iboard = MyUtils.getParamInt("iboard", request);
-		int iuser = MyUtils.getParamInt("iuser", request);
+		BoardVO bvo = new BoardVO();
+		bvo.setIboard(iboard);
+		int iuser = BoardDAO.selBoard(bvo).getIboard();
 		HttpSession session = request.getSession();
 		UserVO user = (UserVO) session.getAttribute("loginUser");
 		if(user.getIuser() != iuser) {
 			response.sendRedirect("/board/list");
 		}
-		BoardVO bvo = new BoardVO();
-		bvo.setIboard(iboard);
+		
 		
 		int test = BoardDAO.delBoard(bvo);
 		response.sendRedirect("/board/list");

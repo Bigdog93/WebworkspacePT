@@ -26,12 +26,20 @@ public class CmtServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int icmt = MyUtils.getParamInt("icmt", request);
 		int iboard = MyUtils.getParamInt("iboard", request);
 		String cmt = request.getParameter("cmt");
 		int iuser = MyUtils.getLoginUserPk(request);
 		CmtVO cvo = new CmtVO(iuser, iboard, cmt);
-		int test = CmtDAO.insCmt(cvo);
+		if(icmt == 0) {
+			int test = CmtDAO.insCmt(cvo);
+		} else {
+			cvo.setIcmt(icmt);
+			int test = CmtDAO.updCmt(cvo);
+		}
+	
 		response.sendRedirect("detail?iboard=" + iboard);
+		
 	}
 	
 }

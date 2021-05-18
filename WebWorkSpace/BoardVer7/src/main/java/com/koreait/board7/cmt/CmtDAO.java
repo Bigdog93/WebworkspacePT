@@ -72,4 +72,20 @@ public class CmtDAO {
 		}
 		return 0;
 	}
+	
+	public static int updCmt(CmtVO cvo) {
+		String sql = "UPDATE t_board_cmt SET cmt = ?, regdt = NOW() WHERE icmt = ? AND iuser = ?";
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, cvo.getCmt());
+			ps.setInt(2, cvo.getIcmt());
+			ps.setInt(3, cvo.getIuser());
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			return 0;
+		} finally {
+			DBUtils.close(con, ps);
+		}
+	}
 }

@@ -19,11 +19,15 @@
 	<div><h1>BoardList</h1></div>
 	<div><h2>${ sessionScope.loginUser.unm }(${ loginUser.uid })님 환영합니다~</h2></div>
 	<!-- sessionScope.으로 하면 pageContext와 request를 거치지않고 바로 session을 본다. -->
-	<div><a href="write">글쓰기</a></div>
+	<div><a href="write"><button>글쓰기</button></a></div>
 	<div>
-		<a href="/user/logout">logout</a>
+		<a href="/user/logout"><button>logout</button></a>
 	</div>
 	<div>
+		<form action="/board/list" method="post">
+			<input type="text" name="schWord" placeholder="검색어 입력">
+		</form>
+		<a href="/board/list"><button>전체 글 보기</button></a>
 		<table>
 			<tr>
 				<th>글번호</th>

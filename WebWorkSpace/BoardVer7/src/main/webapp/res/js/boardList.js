@@ -4,6 +4,6 @@ function moveToDetail(iboard) {
 	
 }
 
-function moveToBack() {
-	window.history.back();
+function moveToList() {
+	location.href="/board/list";
 }

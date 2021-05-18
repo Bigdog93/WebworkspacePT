@@ -30,9 +30,9 @@ public class BoardDetailServlet extends HttpServlet {
 		BoardVO bvo = new BoardVO();
 		bvo.setIboard(iboard);
 		BoardDAO.selBoard(bvo);
-		request.setAttribute("data", bvo);
 		List<CmtVO> cmtlist = CmtDAO.selCmtList(bvo);
-		request.setAttribute("cmtlist", cmtlist);
+		request.setAttribute("data", bvo); // 글의 정보
+		request.setAttribute("cmtlist", cmtlist); // 댓글 리스트 정볻
 		MyUtils.openJSP("/board/boarddetail", request, response);
 	}
 

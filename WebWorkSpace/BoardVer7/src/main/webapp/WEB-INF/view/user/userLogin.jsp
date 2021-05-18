@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script defer src="/res/js/userlogin.js"></script>
 <style>
 .err {
 	color : red;
+	display: none;
 }
 </style>
 <title>Login</title>
