@@ -66,6 +66,7 @@
 					<td>
 					<c:if test="${sessionScope.loginUser.iuser == i.iuser}">
 						<button onclick="updCmt(${i.icmt}, '${i.cmt.trim()}')">수정</button> <!-- a태그 쓸때는 버튼 바깥으로 -->
+						<!-- 자바스크립트 파라미터 넘겨줄때, 문자열자료는 ''로 감싸줄것.(아니면 변수명으로 취급함) -->
 						<%-- <a href="cmt?icmt=${i.icmt}&iboard=${data.iboard}"> --%><button onclick="delCmt(${data.iboard}, ${i.icmt})">삭제</button> <!-- button의 type의 default는 "submit"이다. -->
 						<!-- 그래서 form 태그 안에서 button태그 쓸때는 조심해야 한다. -->
 					</c:if>
