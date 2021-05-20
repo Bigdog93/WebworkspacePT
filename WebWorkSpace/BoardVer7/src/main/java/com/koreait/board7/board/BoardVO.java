@@ -11,6 +11,7 @@ public class BoardVO {
 	private int viewcnt;
 	private String uid;
 	private int cmtcnt;
+	private int isLike;
 	
 	public BoardVO() {}
 	
@@ -97,5 +98,13 @@ public class BoardVO {
 
 	public void setCmtcnt(int cmtcnt) {
 		this.cmtcnt = cmtcnt;
+	}
+
+	public int getIsLike() {
+		return isLike;
+	}
+
+	public void setIsLike(int isLike) {
+		this.isLike = isLike;
 	}
 }

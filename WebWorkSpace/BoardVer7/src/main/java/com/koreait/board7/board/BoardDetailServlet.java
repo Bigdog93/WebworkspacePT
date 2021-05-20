@@ -27,11 +27,13 @@ public class BoardDetailServlet extends HttpServlet {
 		}
 		
 		int iboard = MyUtils.getParamInt("iboard", request);
+		int loginPK = MyUtils.getLoginUserPk(request);
 		BoardVO bvo = new BoardVO();
 		bvo.setIboard(iboard);
-		BoardDAO.selBoard(bvo);
-		List<CmtVO> cmtlist = CmtDAO.selCmtList(bvo);
-		request.setAttribute("data", bvo); // 글의 정보
+		bvo.setIuser(loginPK);
+		BoardVO result = BoardDAO.selBoard(bvo);
+		List<CmtVO> cmtlist = CmtDAO.selCmtList(result);
+		request.setAttribute("data", result); // 글의 정보
 		request.setAttribute("cmtlist", cmtlist); // 댓글 리스트 정볻
 		MyUtils.openJSP("/board/boarddetail", request, response);
 	}

@@ -5,17 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>detail</title>
 <script defer src="/res/js/boarddetail.js"></script>
 <link rel="stylesheet" href="/res/css/boardList.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- 외부에 오픈되어있는 CSS파일 사용법. (CDN) -->
 <style>
 .hidden {
-	display : none;
+	display : none !important; /* important주면 최고 우선순위 */
 }
+.fa-heart {color : red;}
 </style>
+<title>detail</title>
 </head>
 <body>
-	<h1>${ data.title }</h1>
+	<h1>${ data.title }
+		<c:if test="${data.isLike eq 0}">
+		<a href="like?iboard=${data.iboard}&like=1"><i class="far fa-heart"></i></a>
+		</c:if>
+		<c:if test="${data.isLike eq 1}">
+		<a href="like?iboard=${data.iboard}&like=0"><i class="fas fa-heart"></i></a> <!-- 여러개의 클래스를 부여할때는 띄어쓰기로 구분 -->
+		</c:if>
+	</h1>
 	<div>
 		${ data.ctnt }
 	</div>

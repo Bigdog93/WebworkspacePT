@@ -89,22 +89,33 @@ public class BoardDAO {
 	}
 	
 	public static BoardVO selBoard(BoardVO param) {
-		String sql = "SELECT A.*, B.uid FROM t_board A LEFT JOIN t_user B ON A.iuser = B.iuser WHERE iboard = ?";
+		String sql = "SELECT A.*, B.uid, if(C.iboard IS NULL, 0, 1) AS isLike "
+				+ "FROM t_board A "
+				+ "LEFT JOIN t_user B "
+				+ "ON A.iuser = B.iuser "
+				+ "LEFT JOIN t_board_like C "
+				+ "ON A.iboard = C.iboard "
+				+ "AND C.iuser = ? "
+				+ "WHERE A.iboard = ?";
 		try {
 			con = DBUtils.getCon();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, param.getIboard());
+			ps.setInt(1, param.getIuser());
+			ps.setInt(2, param.getIboard());
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				param.setCtnt(rs.getString("ctnt"));
-				param.setDislike(rs.getInt("dislike"));
-				param.setIuser(rs.getInt("iuser"));
-				param.setLikecnt(rs.getInt("likecnt"));
-				param.setRegdt(rs.getString("regdt"));
-				param.setTitle(rs.getString("title"));
-				param.setViewcnt(rs.getInt("viewcnt"));
-				param.setUid(rs.getString("uid"));
-				return param;
+				BoardVO bvo = new BoardVO();
+				bvo.setIboard(rs.getInt("iboard"));
+				bvo.setCtnt(rs.getString("ctnt"));
+				bvo.setDislike(rs.getInt("dislike"));
+				bvo.setIuser(rs.getInt("iuser"));
+				bvo.setLikecnt(rs.getInt("likecnt"));
+				bvo.setRegdt(rs.getString("regdt"));
+				bvo.setTitle(rs.getString("title"));
+				bvo.setViewcnt(rs.getInt("viewcnt"));
+				bvo.setUid(rs.getString("uid"));
+				bvo.setIsLike(rs.getInt("isLike"));
+				return bvo;
 			}
 			return null;
 		} catch (Exception e) {
