@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>BoardVer9</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+    <!-- 한글설정 필터추가 -->
+	<!-- 서블릿 만나기 전에 실행되는 친구 클라이언트가 요청을 보낼때 필터를 거치고, 다시 클라이언트에게 전송될때 필터를 거친다. -->
+	<filter>
+		<filter-name>Set Character Encoding</filter-name>
+		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<!-- 여기까지만 쓰면 어떤것도 필터를 거치지 않는다. 그래서 필터맵핑을 통해 어떤 애들을 필터로 보낼지 설정해줘야 한다. 필터와 필터맵핑은 한셋트 -->
+	<filter-mapping>
+		<filter-name>Set Character Encoding</filter-name> <!-- 위에 필터네임과 맞춰야함. 변수명 같은 느낌 -->
+		<url-pattern>/*</url-pattern> <!-- 이렇게 해놓으면 모든 요청을 다 필터설정 한다는 뜻 -->
+	</filter-mapping> 
+	<!-- 한글설정 END -->
+</web-app>
