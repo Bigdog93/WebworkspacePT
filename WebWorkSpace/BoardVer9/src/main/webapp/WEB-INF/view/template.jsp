@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/res/css/common.css"> <!-- 브라우저가 문자열로 되어있는 HTML을 읽다가 얘 만나면 다운로드 요청을 또 보낸다.(HTML 불러올때 같이 데려오는게 아니다.) -->
+<script defer src="/res/js/common.js"></script>
 <title>${requestScope.title}</title>
 </head>
 <body>

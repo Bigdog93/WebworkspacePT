@@ -17,8 +17,26 @@ public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<BoardDomain> list = BoardDAO.selBoardList();
-		request.setAttribute("list", list);
+		//페이징 처리
+		final int recordCnt = 5;
+		int cPage = MyUtils.getParamInt("cPage", request);
+		cPage = (cPage != 0) ? cPage :  1;
+		int startIdx = (cPage-1) * recordCnt;
+		BoardDTO param = new BoardDTO(startIdx, recordCnt);
+		
+		 //검색 담당
+		int searchType = MyUtils.getParamInt("searchType", request);
+		String searchText = request.getParameter("searchText");
+		
+		if(searchType != 0 && searchText != null && !searchText.equals("")) {
+			param.setSearchText(searchText);
+			param.setSearchType(searchType);
+		}
+		
+		
+		request.setAttribute("cPage", cPage);
+		request.setAttribute("maxPage", BoardDAO.maxPage(param));
+		request.setAttribute("list", BoardDAO.selBoardList(param));
 		MyUtils.openJSP("LIST", "board/boardList", request, response);
 	}
 

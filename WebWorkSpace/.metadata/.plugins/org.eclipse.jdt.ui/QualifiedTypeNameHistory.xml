@@ -20,7 +20,6 @@
     <fullyQualifiedTypeName name="com.koreait.board6.coment.ComentDAO"/>
     <fullyQualifiedTypeName name="com.koreait.board6.MyUtils"/>
     <fullyQualifiedTypeName name="com.koreait.board7.cmt.CmtDAO"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.koreait.board7.MyUtils"/>
     <fullyQualifiedTypeName name="com.koreait.board7.DBUtils"/>
     <fullyQualifiedTypeName name="com.sleepyaog.board7.common.MyUtils"/>
@@ -34,4 +33,11 @@
     <fullyQualifiedTypeName name="com.koreait.board8.Const"/>
     <fullyQualifiedTypeName name="com.koreait.board8.MyUtils"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="com.google.gson.Gson"/>
+    <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+    <fullyQualifiedTypeName name="com.koreait.board9.MyUtils"/>
+    <fullyQualifiedTypeName name="com.koreait.board9.DBUtils"/>
+    <fullyQualifiedTypeName name="com.koreait.board9.cmt.BoardCmtEntity"/>
+    <fullyQualifiedTypeName name="com.koreait.board9.cmt.BoardCmtDAO"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>

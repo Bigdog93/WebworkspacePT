@@ -13,7 +13,7 @@ public class MyUtils {
 	
 	public static boolean loginChk(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginUser") == null) {
+		if(session.getAttribute(Const.LOGINUSER) == null) {
 			return false;
 		}
 		return true;

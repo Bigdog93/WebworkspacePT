@@ -1,9 +1,6 @@
 @charset "UTF-8";
 
-html, body, ul {
-	margin : 0;
-	padding : 0;
-}
+html, body, ul { margin : 0; padding : 0; }
 
 .navigation {
 	height: 50px;
@@ -18,6 +15,9 @@ html, body, ul {
 	justify-content: center;
 }
 
-.navigation ul li {
-	margin-left: 20px;
-}
+.navigation ul li { margin-left: 20px; }
+
+.colorRed { color : red; }
+
+section {padding-left: 40px; padding-right: 40px;}
+
