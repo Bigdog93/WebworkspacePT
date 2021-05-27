@@ -112,7 +112,7 @@ public class BoardDAO {
 	}
 	
 	public static BoardDomain selBoard(BoardDTO param) {
-		String sql = "SELECT A.title, A.ctnt, A.regdt"
+		String sql = "SELECT A.title, A.ctnt, A.regdt, A.iuser"
 				+ ", B.unm AS writerNm "
 				+ "FROM t_board A "
 				+ "LEFT JOIN t_user B "
@@ -131,6 +131,7 @@ public class BoardDAO {
 				vo.setRegdt(rs.getString("regdt"));
 				vo.setTitle(rs.getString("title"));
 				vo.setWriterNm(rs.getString("writerNm"));
+				vo.setIuser(rs.getInt("iuser"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,5 +139,21 @@ public class BoardDAO {
 			DBUtils.close(con, ps, rs);
 		}
 		return vo;
+	}
+	
+	public static int delBoard(BoardDTO param) {
+		String sql = "DELETE FROM t_board WHERE iboard = ? AND iuser = ?";
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getIboard());
+			ps.setInt(2, param.getIuser());
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			DBUtils.close(con, ps);
+		}
 	}
 }

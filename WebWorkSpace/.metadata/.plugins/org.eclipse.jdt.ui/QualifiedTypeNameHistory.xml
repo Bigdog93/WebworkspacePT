@@ -35,9 +35,9 @@
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="com.google.gson.Gson"/>
     <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
-    <fullyQualifiedTypeName name="com.koreait.board9.MyUtils"/>
     <fullyQualifiedTypeName name="com.koreait.board9.DBUtils"/>
     <fullyQualifiedTypeName name="com.koreait.board9.cmt.BoardCmtEntity"/>
     <fullyQualifiedTypeName name="com.koreait.board9.cmt.BoardCmtDAO"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.koreait.board9.MyUtils"/>
 </qualifiedTypeNameHistroy>

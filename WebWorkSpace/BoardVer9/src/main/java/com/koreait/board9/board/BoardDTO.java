@@ -6,6 +6,7 @@ public class BoardDTO { // DAO에게 보내는 파라미터로 쓸 친구
 	private int searchType;
 	private String searchText;
 	private int iboard;
+	private int iuser;
 	public BoardDTO() {}
 	public BoardDTO(int startIdx, int recordCnt) {
 		super();
@@ -41,5 +42,11 @@ public class BoardDTO { // DAO에게 보내는 파라미터로 쓸 친구
 	}
 	public void setIboard(int iboard) {
 		this.iboard = iboard;
+	}
+	public int getIuser() {
+		return iuser;
+	}
+	public void setIuser(int iuser) {
+		this.iuser = iuser;
 	}
 }

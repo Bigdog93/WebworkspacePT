@@ -41,7 +41,8 @@ public class BoardCmtDAO {
 				+ "FROM t_board_cmt A "
 				+ "LEFT JOIN t_user B "
 				+ "ON A.iuser = B.iuser "
-				+ "WHERE A.iboard = ? ";
+				+ "WHERE A.iboard = ? "
+				+ "ORDER BY A.icmt ASC";
 		try {
 			con = DBUtils.getCon();
 			ps = con.prepareStatement(sql);
@@ -62,5 +63,20 @@ public class BoardCmtDAO {
 			DBUtils.close(con, ps, rs);
 		}
 		return cmtList;
+	}
+	
+	public static int delBoardCmt(BoardCmtEntity param) {
+		String sql = "DELETE FROM t_board_cmt WHERE icmt = ? AND iuser = ?";
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getIcmt());
+			ps.setInt(2, param.getIuser());
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			return 0;
+		} finally {
+			DBUtils.close(con, ps);
+		}
 	}
 }

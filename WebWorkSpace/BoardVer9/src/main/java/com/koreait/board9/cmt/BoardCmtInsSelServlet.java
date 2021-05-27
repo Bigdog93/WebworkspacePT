@@ -59,7 +59,7 @@ public class BoardCmtInsSelServlet extends HttpServlet {
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(cmtlist);
-		
+		response.setCharacterEncoding("UTF-8");
 		response.getWriter().append(json);
 	}
 

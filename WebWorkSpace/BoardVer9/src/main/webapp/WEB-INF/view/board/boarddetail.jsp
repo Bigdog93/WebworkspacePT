@@ -2,10 +2,12 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script defer src="/res/js/boardDetail.js"></script>
 
 <h1>${ data.title }</h1>
+<c:if test=""><i class="far fa-heart" id="likeIcon" onclick="slapLike(${data.iboard});"></i></c:if>
+<c:if test=""><i class="fas fa-heart" onclick="cancleLike(${data.iboard});"></i></c:if>
 <div>
 	<c:out value="${ data.ctnt }" />
 </div>
@@ -19,9 +21,11 @@
 	</div>
 </c:if>
 <div>
-	<form id="cmtFrm" data-iboard="${data.iboard}" onsubmit="return false"> <!-- dataset의 속성명iboard에 값 저장 -->
+<c:if test="${not empty sessionScope.loginUser}">
+	<form id="cmtFrm" onsubmit="return false"> <!-- dataset의 속성명iboard에 값 저장 -->
 		<input type="text" id="cmt">
 		<input type="button" value="댓글달기" onclick="regCmt();">
 	</form>
+</c:if>
 </div>
-<div id="cmtlist"></div>
+<div id="cmtList" data-login_user_pk="${sessionScope.loginUser.iuser}" data-iboard="${data.iboard}"></div>
