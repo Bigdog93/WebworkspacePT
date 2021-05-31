@@ -41,6 +41,7 @@ public class UserDAO {
 				uvo.setIuser(rs.getInt("iuser"));
 				uvo.setUid(param.getUid());
 				uvo.setUpw(rs.getString("upw"));
+				uvo.setProfileImg(rs.getString("profileImg"));
 				return uvo;
 			}
 
@@ -50,5 +51,34 @@ public class UserDAO {
 			DBUtils.close(con, ps, rs);
 		}
 		return null;
+	}
+	
+	public static int updUser(UserEntity param) {
+		String sql = "UPDATE t_user SET ";
+		String updString = null;
+		
+		if(param.getUpw() != null && !param.getUpw().equals("")) {
+			sql += " upw = ? ";
+			updString = param.getUpw();
+		}else if(param.getProfileImg() != null && !param.getProfileImg().equals("")) {
+			sql += " profileimg = ? ";
+			updString = param.getProfileImg();
+		}else if(param.getUid() != null && !param.getUid().equals("")) {
+			sql += " uid = ? ";
+			updString = param.getUid();
+		}
+		sql += "WHERE iuser = ? ";
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, updString);
+			ps.setInt(2, param.getIuser());
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			DBUtils.close(con, ps);
+		}
 	}
 }

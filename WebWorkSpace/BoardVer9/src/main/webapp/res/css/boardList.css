@@ -4,3 +4,9 @@
 	cursor : pointer;
 }
 .record:hover {background-color: gray;}
+
+.profileImg {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}

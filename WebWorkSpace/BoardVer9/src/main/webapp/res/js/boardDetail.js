@@ -1,5 +1,6 @@
 var cmtFrmElem = document.querySelector('#cmtFrm');
 var cmtListElem = document.querySelector('#cmtList');
+var cmtModModalElem = document.querySelector('#modal');
 
 function regCmt() {
 
@@ -95,10 +96,14 @@ function makeCmtElemList(data) {
 
 			// 삭제 버튼 클릭시
 			delBtn.addEventListener('click', function() {
-				delAjax(item.icmt);
+				if(confirm('삭제하시겠습니까?')) {
+					delAjax(item.icmt);					
+				}
 			});
+			// 수정 버튼 클릭시
 			modBtn.addEventListener('click', function() {
-				
+				// 댓글 수정 모달창 띄우기
+				openModModal(item);
 			});
 			
 			delBtn.innerText = '삭제';
@@ -131,6 +136,39 @@ function delAjax(icmt) {
 			case 1:
 				getListAjax();
 				break;
+		}
+	})
+}
+
+function openModModal({icmt, cmt}) { // 파라미터를 이렇게 해놓으면 객체를 넘겼을때 그 객체중 받고 싶은 멤버필드만 받아 저장한다.
+	var cmtModFrmElem = document.querySelector('#cmtModFrm');
+	cmtModFrmElem.icmt.value = icmt;
+	cmtModFrmElem.cmt.value = cmt;
+	cmtModModalElem.className = '';
+}
+
+function closeModModal() {
+	cmtModModalElem.className = 'displayNone';
+}
+
+function modAjax() {
+	var cmtModFrmElem = document.querySelector('#cmtModFrm');
+	var param = {
+		icmt: cmtModFrmElem.icmt.value,
+		cmt: cmtModFrmElem.cmt.value
+	}
+	const init = {
+		method: 'POST',
+		body: new URLSearchParams(param)
+	}
+	fetch('cmtDelUpd', init)
+	.then(function(res) { return res.json();})
+	.then(function(myJson) {
+		if(myJson.result == 1) {
+			closeModModal();
+			getListAjax();
+		}else {
+			alert('댓글 수정 실패');
 		}
 	})
 }

@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 html, body, ul { margin : 0; padding : 0; }
+section {padding-left: 40px; padding-right: 40px;}
 
 .navigation {
 	height: 50px;
@@ -19,5 +20,4 @@ html, body, ul { margin : 0; padding : 0; }
 
 .colorRed { color : red; }
 
-section {padding-left: 40px; padding-right: 40px;}
-
+.displayNone {display: none !important; }

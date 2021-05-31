@@ -16,7 +16,7 @@ public class BoardDAO {
 	public static List<BoardDomain> selBoardList(BoardDTO param) {
 		List<BoardDomain> list = new ArrayList<BoardDomain>();
 		
-		String sql = "SELECT A.iboard, A.title, A.iuser, A.regdt, B.unm as writerNm "
+		String sql = "SELECT A.iboard, A.title, A.iuser, A.regdt, B.unm as writerNm, B.profileimg "
 				+ "FROM t_board A "
 				+ "INNER JOIN t_user B "
 				+ "ON A.iuser = B.iuser ";
@@ -52,6 +52,7 @@ public class BoardDAO {
 				vo.setRegdt(rs.getString("regdt"));
 				vo.setIuser(rs.getInt("iuser"));
 				vo.setWriterNm(rs.getString("writerNm"));
+				vo.setProfileImg(rs.getString("profileimg"));
 				list.add(vo);
 			}
 		} catch (Exception e) {

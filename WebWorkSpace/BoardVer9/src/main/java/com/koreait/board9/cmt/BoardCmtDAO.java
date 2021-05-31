@@ -79,4 +79,22 @@ public class BoardCmtDAO {
 			DBUtils.close(con, ps);
 		}
 	}
+	
+	public static int modBoardCmt(BoardCmtEntity param) {
+		String sql = "UPDATE t_board_cmt "
+				+ "SET cmt = ? "
+				+ "WHERE icmt = ? AND iuser = ? ";
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, param.getCmt());
+			ps.setInt(2, param.getIcmt());
+			ps.setInt(3, param.getIuser());
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			return 0;
+		} finally {
+			DBUtils.close(con, ps);
+		}
+	}
 }

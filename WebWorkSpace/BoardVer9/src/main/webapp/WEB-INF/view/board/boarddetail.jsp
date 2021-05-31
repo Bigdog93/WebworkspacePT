@@ -3,6 +3,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/res/css/boardDetail.css">
 <script defer src="/res/js/boardDetail.js"></script>
 
 <h1>${ data.title }</h1>
@@ -29,3 +30,15 @@
 </c:if>
 </div>
 <div id="cmtList" data-login_user_pk="${sessionScope.loginUser.iuser}" data-iboard="${data.iboard}"></div>
+
+<div id="modal" class="displayNone">
+	<div class="modal_content">
+		<form id="cmtModFrm" action="#">
+			<input type="hidden" id="icmt">
+			<input type="text" id="cmt">
+		</form>
+		<input type="button" value="댓글 수정" onclick="modAjax();">
+		<input type="button" value="취소" onclick="closeModModal();">
+	</div>
+</div>
+
